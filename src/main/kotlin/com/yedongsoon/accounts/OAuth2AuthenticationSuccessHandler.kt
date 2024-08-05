@@ -37,7 +37,7 @@ class OAuth2AuthenticationSuccessHandler(
     }
 
     private fun makeRedirectUrl(token: String): String {
-        return UriComponentsBuilder.fromUriString("http://158.247.198.100:32435//redirect")
+        return UriComponentsBuilder.fromUriString("http://158.247.198.100:32435/redirect")
                 .queryParam("token", token)
                 .build()
                 .toUriString()
