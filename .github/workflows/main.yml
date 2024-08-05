@@ -1,0 +1,68 @@
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v2
+      with:
+        distribution: 'adopt'
+        java-version: '17'
+
+    - name: Gradle Caching
+      uses: actions/cache@v3
+      with:
+        path: |
+          ~/.gradle/caches
+          ~/.gradle/wrapper
+        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+        restore-keys: |
+          ${{ runner.os }}-gradle-
+
+    - name: Build with Gradle
+      run: ./gradlew -x test build
+
+    - name: Extract build date
+      id: vars
+      run: echo "BUILD_DATE=$(date +'%Y%m%d%H%M%S')" >> $GITHUB_ENV
+
+    - name: Docker build & push to prod
+      if: contains(github.ref, 'main')
+      run: |
+        docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} -p ${{ secrets.DOCKER_HUB_PASSWORD }}
+        docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/accounts:${{ env.BUILD_DATE }} .
+        docker push ${{ secrets.DOCKER_HUB_USERNAME }}/accounts:${{ env.BUILD_DATE }}
+
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Checkout deployment repo
+      uses: actions/checkout@v2
+      with:
+        repository: HappyScrolls/config
+        token: ${{ secrets.DEPLOYMENT_REPO_PAT }}
+        path: deployment-repo
+
+    - name: Set up kubectl
+      uses: azure/setup-kubectl@v1
+      with:
+        version: 'v1.20.0'
+
+    - name: Create kubeconfig directory
+      run: mkdir -p $HOME/.kube
+
+    - name: Create kubeconfig
+      run: echo "${{ secrets.KUBE_CONFIG }}" > $HOME/.kube/config
+
+    - name: Deploy to Kubernetes
+      run: |
+        kubectl apply -f deployment-repo/k8s/accounts.yaml
+        kubectl set image deployment/accounts-deployment accounts=${{ secrets.DOCKER_HUB_USERNAME }}/accounts:${{ env.BUILD_DATE }}
