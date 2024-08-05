@@ -13,7 +13,7 @@ spring:
             client-id: 70f9602918e39f149728c1c18b7fc545
             client-secret: sGODStcWmvZh4hFxDoWcpyfe9ilmbQ5J
             client-authentication-method: client_secret_post
-            redirect-uri: http://localhost:8080/login/oauth2/code/kakao
+            redirect-uri: http://158.247.198.100:32001/login/oauth2/code/kakao
             authorization-grant-type: authorization_code
             client-name: kakao
             scope:
@@ -33,3 +33,5 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQLDialect
+server:
+  port: 8032
