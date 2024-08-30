@@ -22,7 +22,7 @@ spring:
               - profile_image
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://158.247.198.100:32009/member?autoReconnect=true&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://158.247.198.100:32009/accounts?autoReconnect=true&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true
     username: root
     password: root
     cache-prep-stmts: true
