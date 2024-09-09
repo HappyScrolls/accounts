@@ -10,7 +10,8 @@ import org.springframework.stereotype.Component
 import org.springframework.web.util.UriComponentsBuilder
 @Component
 class OAuth2AuthenticationSuccessHandler(
-        private val jwtTokenUtil: JwtTokenUtil
+        private val jwtTokenUtil: JwtTokenUtil,
+        private val memberRepository: MemberRepository,
 ) : SimpleUrlAuthenticationSuccessHandler() {
 
     override fun onAuthenticationSuccess(
@@ -25,7 +26,16 @@ class OAuth2AuthenticationSuccessHandler(
         val properties = oAuth2User.attributes["properties"] as Map<*, *>
         val nickname = properties["nickname"] as String
         val profileImage = properties["profile_image"] as String
-        val token = jwtTokenUtil.generateToken("kakao", email, nickname, profileImage)
+
+        val memberNo:Int= memberRepository.findByEmail(email)?.no?:let {
+            memberRepository.save(Member.create(
+                    accountId = "account",
+                    name=nickname,
+                    email=email,
+                    profilePhoto=profileImage,
+            )).no
+        }
+        val token = jwtTokenUtil.generateToken("kakao", email, nickname, profileImage,memberNo)
 
         val url = makeRedirectUrl(token)
 
