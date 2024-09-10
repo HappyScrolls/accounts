@@ -37,8 +37,8 @@ class OAuth2AuthenticationSuccessHandler(
         }
         val token = jwtTokenUtil.generateToken("kakao", email, nickname, profileImage,memberNo)
 
-
-        val url = if(request.remoteAddr.equals("158.247.198.100")) makeRedirectUrl(token) else makeLocalRedirectUrl(token)
+        println("request.remoteAddr = ${request.remoteAddr}")
+        val url = if(request.remoteAddr.contains("*158*")) makeRedirectUrl(token) else makeLocalRedirectUrl(token)
 
         if (response.isCommitted) {
             logger.debug("응답이 이미 커밋된 상태입니다. $url 로 리다이렉트할 수 없습니다.")
