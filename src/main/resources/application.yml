@@ -23,8 +23,8 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://dev-mysql:3306/yedongsoon?autoReconnect=true&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true
-    username: root
-    password: root
+    username: hyuksoon
+    password: hs0103
     cache-prep-stmts: true
   jpa:
     hibernate:
