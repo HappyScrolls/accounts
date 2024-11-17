@@ -35,7 +35,8 @@ class OAuth2AuthenticationSuccessHandler(
                     profilePhoto=profileImage,
             )).no
         }
-        val token = jwtTokenUtil.generateToken("kakao", email, nickname, profileImage,memberNo)
+        //val token = jwtTokenUtil.generateToken("kakao", email, nickname, profileImage,memberNo)
+        val token=MemberData(memberNo,nickname,email).encodeDtoToBase64()
 
         println("request.remoteAddr = ${request.remoteAddr}")
         //val url = if(request.remoteAddr.contains("*158*")) makeRedirectUrl(token) else makeLocalRedirectUrl(token)
@@ -60,4 +61,9 @@ class OAuth2AuthenticationSuccessHandler(
                 .build()
                 .toUriString()
     }
+    data class MemberData(
+            val no:Int,
+            val name:String,
+            val account:String,
+    )
 }

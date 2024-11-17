@@ -39,6 +39,7 @@ dependencies {
 	runtimeOnly("com.mysql:mysql-connector-j")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation(kotlin("stdlib-jdk8"))
+	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 
 
 }
