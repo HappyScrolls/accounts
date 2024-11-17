@@ -13,7 +13,7 @@ spring:
             client-id: 70f9602918e39f149728c1c18b7fc545
             client-secret: sGODStcWmvZh4hFxDoWcpyfe9ilmbQ5J
             client-authentication-method: client_secret_post
-            redirect-uri: http://158.247.198.100:32001/login/oauth2/code/kakao
+            redirect-uri: http://158.247.197.4:8085/login/oauth2/code/kakao
             authorization-grant-type: authorization_code
             client-name: kakao
             scope:
@@ -22,7 +22,7 @@ spring:
               - profile_image
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://158.247.198.100:32009/accounts?autoReconnect=true&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://dev-mysql:3306/yedongsoon?autoReconnect=true&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true
     username: root
     password: root
     cache-prep-stmts: true
