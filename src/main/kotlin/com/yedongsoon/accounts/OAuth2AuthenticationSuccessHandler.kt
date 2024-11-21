@@ -48,7 +48,7 @@ class OAuth2AuthenticationSuccessHandler(
     }
 
     private fun makeRedirectUrl(token: String): String {
-        return UriComponentsBuilder.fromUriString("http://158.247.197.4/redirect")
+        return UriComponentsBuilder.fromUriString("https://togethery.store/redirect")
                 .queryParam("token", token)
                 .build()
                 .toUriString()
