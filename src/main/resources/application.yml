@@ -13,7 +13,7 @@ spring:
             client-id: 70f9602918e39f149728c1c18b7fc545
             client-secret: sGODStcWmvZh4hFxDoWcpyfe9ilmbQ5J
             client-authentication-method: client_secret_post
-            redirect-uri: https://togethery.store/accounts/login/oauth2/code/kakao
+            redirect-uri: https://accounts.togethery.store/accounts/login/oauth2/code/kakao
             authorization-grant-type: authorization_code
             client-name: kakao
             scope:
