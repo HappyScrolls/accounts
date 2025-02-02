@@ -69,7 +69,7 @@ class KakaoController(
     private val memberRepository: MemberRepository
 ) {
     private val kakaoUserUrl = "https://kapi.kakao.com/v2/user/me"
-    @GetMapping("/callback")
+    @PostMapping("/callback")
     fun kakaoLogin(@RequestParam code: String): ResponseEntity<Any> {
         println("실행되긴 하니")
         println("code = ${code}")
@@ -78,6 +78,16 @@ class KakaoController(
 
         val redirectUrl = UriComponentsBuilder.fromUriString("https://togethery.store/redirect")
             .queryParam("token", token)
+            .build()
+            .toUriString()
+
+        return ResponseEntity.status(HttpStatus.FOUND).header("Location", redirectUrl).build()
+    }
+    @GetMapping("/callback")
+    fun getKakaoLogin(@RequestParam code: String): ResponseEntity<Any> {
+        println("get 이니")
+        println("code = ${code}")
+        val redirectUrl = UriComponentsBuilder.fromUriString("https://togethery.store/redirect")
             .build()
             .toUriString()
 
