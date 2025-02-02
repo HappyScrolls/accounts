@@ -35,3 +35,5 @@ spring:
         dialect: org.hibernate.dialect.MySQLDialect
 server:
   port: 8085
+  tomcat:
+    remoteip: protocol-header=x-forwarded-proto
