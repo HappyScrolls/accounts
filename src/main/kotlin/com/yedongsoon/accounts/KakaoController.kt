@@ -71,6 +71,8 @@ class KakaoController(
     private val kakaoUserUrl = "https://kapi.kakao.com/v2/user/me"
     @GetMapping("/callback")
     fun kakaoLogin(@RequestParam code: String): ResponseEntity<Any> {
+        println("실행되긴 하니")
+        println("code = ${code}")
         val tokenResponse = getKakaoToken(code)
         val token = getKakaoUserInfo(tokenResponse.accessToken)?.let{createJwtToken(it)}?:""
 
