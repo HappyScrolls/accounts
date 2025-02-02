@@ -1,25 +1,25 @@
 spring:
-  security:
-    oauth2:
-      client:
-        provider:
-          kakao:
-            authorization-uri: https://kauth.kakao.com/oauth/authorize
-            token-uri: https://kauth.kakao.com/oauth/token
-            user-info-uri: https://kapi.kakao.com/v2/user/me
-            user-name-attribute: id
-        registration:
-          kakao:
-            client-id: 70f9602918e39f149728c1c18b7fc545
-            client-secret: sGODStcWmvZh4hFxDoWcpyfe9ilmbQ5J
-            client-authentication-method: client_secret_post
-            redirect-uri: https://accounts.togethery.store/login/oauth2/code/kakao
-            authorization-grant-type: authorization_code
-            client-name: kakao
-            scope:
-              - profile_nickname
-              - account_email
-              - profile_image
+#  security:
+#    oauth2:
+#      client:
+#        provider:
+#          kakao:
+#            authorization-uri: https://kauth.kakao.com/oauth/authorize
+#            token-uri: https://kauth.kakao.com/oauth/token
+#            user-info-uri: https://kapi.kakao.com/v2/user/me
+#            user-name-attribute: id
+#        registration:
+#          kakao:
+#            client-id: 70f9602918e39f149728c1c18b7fc545
+#            client-secret: sGODStcWmvZh4hFxDoWcpyfe9ilmbQ5J
+#            client-authentication-method: client_secret_post
+#            redirect-uri: https://accounts.togethery.store/login/oauth2/code/kakao
+#            authorization-grant-type: authorization_code
+#            client-name: kakao
+#            scope:
+#              - profile_nickname
+#              - account_email
+#              - profile_image
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://dev-mysql:3306/yedongsoon?autoReconnect=true&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true

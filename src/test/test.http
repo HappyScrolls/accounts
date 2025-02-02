@@ -1,0 +1,2 @@
+### test
+GET localhost:8085/auth/callback-method?code=123124safsef
