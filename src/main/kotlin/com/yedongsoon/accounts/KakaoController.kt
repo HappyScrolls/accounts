@@ -94,8 +94,8 @@ class KakaoController(
     private fun getKakaoToken(code: String): KakaoTokenResponse {
         val params = LinkedMultiValueMap<String, String>().apply {
             add("grant_type", "authorization_code")
-            add("client_id", "YOUR_KAKAO_REST_API_KEY")
-            add("redirect_uri", "https://api.togethery.store/auth/callback")
+            add("client_id", "70f9602918e39f149728c1c18b7fc545")
+            add("redirect_uri", "https://accounts.togethery.store/auth/callback")
             add("code", code)
             add("client_secret", "sGODStcWmvZh4hFxDoWcpyfe9ilmbQ5J")
         }
