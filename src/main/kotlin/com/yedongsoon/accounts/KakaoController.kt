@@ -120,7 +120,7 @@ class KakaoController(
 
         val request = HttpEntity<String>(headers)
         val response = restTemplate.exchange(
-            kakaoUserUrl, HttpMethod.GET, request, KakaoUserResponse::class.java
+            kakaoUserUrl, HttpMethod.POST, request, KakaoUserResponse::class.java
         )
 
         return response.body
