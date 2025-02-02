@@ -44,6 +44,9 @@ class OAuth2AuthenticationSuccessHandler(
             logger.debug("응답이 이미 커밋된 상태입니다. $url 로 리다이렉트할 수 없습니다.")
             return
         }
+        println("request = ${request}")
+        println("response = ${response}")
+        println("url = ${url}")
         redirectStrategy.sendRedirect(request, response, url)
     }
 
