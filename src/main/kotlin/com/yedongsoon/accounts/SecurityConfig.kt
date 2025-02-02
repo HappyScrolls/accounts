@@ -12,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.web.SecurityFilterChain
 import org.springframework.stereotype.Component
+import org.springframework.web.client.RestTemplate
 import org.springframework.web.cors.CorsConfiguration
 import org.springframework.web.cors.CorsConfigurationSource
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource
@@ -73,4 +74,12 @@ class WebSecurityConfig(
 
 
 
+}
+
+@Configuration
+class AppConfig {
+    @Bean
+    fun restTemplate(): RestTemplate {
+        return RestTemplate()
+    }
 }
