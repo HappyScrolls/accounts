@@ -3,6 +3,7 @@ package com.yedongsoon.accounts
 import com.fasterxml.jackson.annotation.JsonProperty
 import org.springframework.http.*
 import org.springframework.util.LinkedMultiValueMap
+import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
@@ -68,7 +69,7 @@ class KakaoController(
     private val memberRepository: MemberRepository
 ) {
     private val kakaoUserUrl = "https://kapi.kakao.com/v2/user/me"
-    @PostMapping("/callback")
+    @GetMapping("/callback")
     fun kakaoLogin(@RequestParam code: String): ResponseEntity<Any> {
         val tokenResponse = getKakaoToken(code)
         val token = getKakaoUserInfo(tokenResponse.accessToken)?.let{createJwtToken(it)}?:""
@@ -99,6 +100,7 @@ class KakaoController(
 
 
     private fun createJwtToken(userInfo: KakaoUserResponse): String {
+        println("userInfo = ${userInfo}")
         val email = userInfo.kakao_account?.email?:""
         val nickname = userInfo.properties?.nickname?:""
         val profileImage = userInfo.properties?.profile_image?:""
