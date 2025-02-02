@@ -3,11 +3,7 @@ package com.yedongsoon.accounts
 import com.fasterxml.jackson.annotation.JsonProperty
 import org.springframework.http.*
 import org.springframework.util.LinkedMultiValueMap
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestParam
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 import org.springframework.web.client.RestTemplate
 import org.springframework.web.util.UriComponentsBuilder
 
@@ -63,13 +59,14 @@ data class KakaoUserResponse(
 
 @RestController
 @RequestMapping("/auth")
+@CrossOrigin(origins = arrayOf("*"))
 class KakaoController(
     private val restTemplate: RestTemplate,
     private val jwtTokenUtil: JwtTokenUtil,
     private val memberRepository: MemberRepository
 ) {
     private val kakaoUserUrl = "https://kapi.kakao.com/v2/user/me"
-    @PostMapping("/callback")
+    @GetMapping("/callback")
     fun kakaoLogin(@RequestParam code: String): ResponseEntity<Any> {
         println("실행되긴 하니")
         println("code = ${code}")
@@ -83,9 +80,9 @@ class KakaoController(
 
         return ResponseEntity.status(HttpStatus.FOUND).header("Location", redirectUrl).build()
     }
-    @GetMapping("/callback")
-    fun getKakaoLogin(@RequestParam code: String): ResponseEntity<Any> {
-        println("get 이니")
+    @PostMapping("/callback")
+    fun postKakaoLogin(@RequestParam code: String): ResponseEntity<Any> {
+        println("post 이니")
         println("code = ${code}")
         val redirectUrl = UriComponentsBuilder.fromUriString("https://togethery.store/redirect")
             .build()
